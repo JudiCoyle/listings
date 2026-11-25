@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Buyers Guide | Judi Coyle, REALTOR® | Century 21 United Realty Inc., Brokerage</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#f4efe9;color:#4a4a4a;font-family:Georgia,'Times New Roman',serif}
+.wrap{min-height:100%;display:flex;flex-direction:column;align-items:center}
+header{width:100%;text-align:center;padding:18px 16px 6px}
+header h1{margin:0;font-weight:normal;font-size:28px;color:#b5654e;letter-spacing:.02em}
+header p{margin:6px 0 0;font-size:18px;color:#5a5a5a}
+#stage{flex:1;width:100%;display:flex;align-items:center;justify-content:center;padding:8px 8px 4px}
+#book{margin:0 auto}
+.page{background:#fff;overflow:hidden}
+.page img{width:100%;height:100%;display:block;object-fit:contain;-webkit-user-drag:none;user-select:none}
+.controls{display:flex;align-items:center;gap:14px;padding:10px 12px}
+.controls button{font-family:inherit;font-size:20px;padding:12px 26px;border:2px solid #b5654e;background:#fff;color:#b5654e;border-radius:6px;cursor:pointer}
+.controls button:hover,.controls button:focus{background:#b5654e;color:#fff}
+.controls span{font-size:20px;min-width:110px;text-align:center}
+footer{width:100%;text-align:center;padding:10px 16px 20px;font-size:17px;line-height:1.5;color:#4a4a4a}
+footer a{color:#b5654e}
+noscript{display:block;padding:20px;font-size:20px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Buyers Guide</h1>
+<p>Turn the pages with the buttons, the arrow keys, or by dragging the corner of a page.</p>
+</header>
+<div id="stage"><div id="book"></div></div>
+<div class="controls">
+<button id="prev" type="button" aria-label="Previous page">&larr; Back</button>
+<span id="count">Page 1 of 20</span>
+<button id="next" type="button" aria-label="Next page">Next &rarr;</button>
+</div>
+<footer>
+<strong>Century 21 United Realty Inc., Brokerage</strong> &nbsp;|&nbsp; <strong>Judi Coyle, REALTOR®</strong><br>
+15 Queen St., Lakefield, Ontario &nbsp;|&nbsp; 705-313-4099 &nbsp;|&nbsp; <a href="mailto:judi@judicoyle.com">judi@judicoyle.com</a>
+</footer>
+</div>
+<noscript>This guide needs JavaScript to turn its pages. Please contact Judi Coyle at 705-313-4099.</noscript>
+<script src="../page-flip.browser.js"></script>
+<script>
+(function(){
+var N=20, W=816, H=1056;
+var book=document.getElementById('book');
+for(var i=1;i<=N;i++){
+ var d=document.createElement('div'); d.className='page';
+ var im=document.createElement('img');
+ im.src='pages/p-'+(i<10?'0':'')+i+'.jpg'; im.alt='Buyers Guide, page '+i+' of '+N; im.draggable=false;
+ if(i>3) im.loading='lazy';
+ d.appendChild(im); book.appendChild(d);
+}
+function size(){
+ var availW=Math.min(window.innerWidth-16,1400), availH=window.innerHeight-250;
+ if(availH<420) availH=420;
+ var pw=Math.min(availW/2, availH*W/H);
+ return {w:Math.floor(pw), h:Math.floor(pw*H/W)};
+}
+var s=size();
+var pf=new St.PageFlip(book,{width:s.w,height:s.h,size:'stretch',minWidth:260,maxWidth:760,minHeight:336,maxHeight:984,maxShadowOpacity:.35,showCover:true,mobileScrollSupport:false,usePortrait:true,startPage:0,flippingTime:700});
+pf.loadFromHTML(document.querySelectorAll('.page'));
+var c=document.getElementById('count');
+function upd(){var p=pf.getCurrentPageIndex()+1;c.textContent='Page '+p+' of '+N;}
+pf.on('flip',upd); pf.on('changeState',upd);
+document.getElementById('prev').onclick=function(){pf.flipPrev();};
+document.getElementById('next').onclick=function(){pf.flipNext();};
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')pf.flipNext();if(e.key==='ArrowLeft')pf.flipPrev();});
+})();
+</script>
+</body>
+</html>
